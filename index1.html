@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hls视频流播放</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+    </style>
+</head>
+ 
+<body>
+    <video id="video" autoplay controls></video>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        var video = document.getElementById('video');
+        var videoSrc = 'https://vsd158.okcdn.ru/hls/7523362802357.m3u8/sig/6l98JT0ZWwA/expires/1745245134580/srcIp/109.110.162.52/urls/45.136.22.91/clientType/1/srcAg/UNKNOWN_ANDROID/mid/9549875977909/video.m3u8?p';
+ 
+        if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            // 浏览器本身支持HLS
+            video.src = videoSrc;
+        } else if (Hls.isSupported()) {
+            // 检查是否支持HLS.js
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+        }
+    </script>
+ 
+</body>
+ 
+</html>
